@@ -57,7 +57,9 @@ searchInputBox.addEventListener('keypress' , (event) => {
 
       console.log(searchInputBox.value);
       getWeatherReport(searchInputBox.value);
-      document.querySelector('.weather-body').style.display = "block";
+    document.querySelector('.weather-body').style.display = "block";
+    document.querySelector('.weather-status').style.display = "block";
+    document.querySelector('#myChart').style.display = "block";
 
   }
 });
@@ -71,7 +73,22 @@ function getWeatherReport(city){
     lat = data.coord.lat;
     long = data.coord.lon;
     fetching();
+  }).catch((error) =>{
+    // alert('City not exits');
+    showNotFound()
   });
+}
+
+function showNotFound() {
+  console.log('error');
+  let city = document.getElementById('city');
+  city.innerText = `Enter Correct Country/City Name`;
+  let date = document.getElementById('date');
+  date.innerText = ``;
+
+  document.querySelector('.weather-status').style.display = "none";
+  document.querySelector('#myChart').style.display = "none";
+  
 }
 
 function showWeatherReport(weather){
